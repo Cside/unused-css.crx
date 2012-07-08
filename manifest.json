@@ -2,10 +2,26 @@
     "name": "Unused CSS Class",
     "description": "Inspect CSS",
     "version": "0.1",
+    "browser_action": {
+        "popup": "popup.html"
+    },
     "permissions": [
+        "tabs",
         "http://*/*",
         "https://*/*"
     ],
-    "background_page": "background.html",
-    "option_page": "option.html"
+    "content_scripts": [
+        {
+            "js": [ "content-script.js" ],
+            "run_at": "document_end",
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ]
+        }
+    ]
+    //"icons": {
+    //   "128": "icon128.png"
+    //},
+    //"background_page": "background.html"
 }
