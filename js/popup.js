@@ -22,14 +22,19 @@ chrome.tabs.getSelected(function (tab) {
                     var styles = parser.parse(cssContent, false, true).cssRules;
                     $.each(styles, function () {
                         var selector = this.mSelectorText;
-                        if (selector && $(selector, content).length) {
-                            result.used.push(selector);
-                        } else {
-                            result.unused.push(selector);
+                        try {
+                            if ($(selector, content).length) {
+                                result.used.push(selector);
+                            } else {
+                                result.unused.push(selector);
+                            }
+                        } catch (e) {
+                            console.log('selector parse error: ' + selector + '\n');
                         }
                     });
                 });
-                console.log(result);
+                //console.log(result);
+                document.write(JSON.stringify(result, null, '  '));
             });
         }
     });

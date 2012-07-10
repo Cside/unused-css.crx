@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script type="text/javascript" src="lib/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript" src="lib/jarty.js"></script>
+  <script type="text/javascript" src="lib/jarty.debugger.js"></script>
+  <script type="text/jarty" id="template-select-box">
+    <select id="select-box" name="select-box">
+      {foreach from=$results item=result}
+        <option value="">{$result.url}</option>
+      {/foreach}
+    </select>
+  </script>
+  <script type="text/jarty" id="template-content">
+    <table id="">
+      {foreach from=$styles item=style}
+        <tr>
+          <td {if $style.used}class="used"{/if}>{$style.selector}</td>
+        </tr>
+      {/foreach}
+    </table>
+  </script>
+  <script type="text/javascript">
+    var data = [
+    {
+        url: 'http://example.com/sample.ss',
+        styles: [
+            {
+                selector: 'body',
+                used: true,
+            },
+            {
+                selector: '#foo',
+                used: true,
+            },
+            {
+                selector: '.foo',
+                used: false,
+            },
+        ],
+    },
+    {
+        url: 'http://example.com/sample2.css',
+        styles: [
+            {
+                selector: 'body',
+                used: true,
+            },
+            {
+                selector: '#foo',
+                used: true,
+            },
+            {
+                selector: '.foo',
+                used: false,
+            },
+        ],
+    },
+    ];
+    $(function () {
+      function render (targetSelector, stash) {
+        var template = $( '#template-' + targetSelector ).html();
+        var rendered = Jarty.eval( template, stash );
+        $( '#' + targetSelector ).html( rendered );
+      }
+      render('select-box', {results: data});
+      render('content', {results: data[0].styles});
+      //updateContent(data[0].styles);
+      $('select#select-box').change(function () {
+        render('content', {results: data[0].styles});
+      });
+    });
+  </script>
+</head>
+<body>
+    <div id="select-box">
+    </div>
+    <div id="content">
+    </div>
+</body>
+</html>
