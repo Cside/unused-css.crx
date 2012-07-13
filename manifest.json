@@ -1,7 +1,7 @@
 {
-    "name": "Unused CSS Class",
-    "description": "Inspect CSS",
-    "version": "0.1",
+    "name": "Unused CSS Selectors",
+    "description": "Inspect CSS not used",
+    "version": "0.2",
     "browser_action": {
         "popup": "popup.html"
     },
@@ -23,5 +23,4 @@
     //"icons": {
     //   "128": "icon128.png"
     //},
-    //"background_page": "background.html"
 }
