@@ -1,15 +1,68 @@
 <!DOCTYPE HTML>
 <html lang="en">
-<head>
   <meta charset="UTF-8">
-  <script type="text/javascript" src="./lib/underscore.js"></script>
-  <script type="text/javascript" src="./lib/jquery-1.7.2.min.js"></script>
-  <script type="text/javascript" src="./lib/jsdeferred.jquery.js"></script>
-  <script type="text/javascript" src="./lib/jsdeferred-googlechrome.js"></script>
-  <script type="text/javascript" src="./lib/cssParser.js"></script>
-  <script type="text/javascript" src="./js/popup.js"></script>
+  <link rel="stylesheet" href="http://cside.me/static/css/bootstrap.min.css" />
+  <script type="text/javascript" src="lib/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript" src="lib/jsdeferred-jquery.js"></script>
+  <script type="text/javascript" src="lib/jsdeferred-googlechrome.js"></script>
+  <script type="text/javascript" src="lib/cssParser.js"></script>
+  <script type="text/javascript" src="lib/jarty.js"></script>
+  <!-- Dev
+  <script type="text/javascript" src="lib/jarty.debugger.js"></script>
+  -->
+  <script type="text/javascript" src="js/popup.js"></script>
+  <script type="text/jarty" id="template-select-box">
+      {foreach from=$results item=result name=selectBox}
+      <option value="{$jarty.foreach.selectBox.index}">{$result.url}</option>
+      {/foreach}
+  </script>
+  <script type="text/jarty" id="template-content">
+    <h2>Summary</h2>
+    <p>used: {$used}, unused: {$unused}</p>
+    <h2>Unused Styles</h2>
+    <table>
+      {foreach from=$styles item=style}
+      <tr class="{if $style.used}used{else}unused{/if}">
+        <td>
+          <pre><code>{$style.styleText}</code></pre>
+        </td>
+      </tr>
+      {/foreach}
+    </table>
+  </script>
 </head>
 <body>
-    <p>popup</p>
+    <div id="header">
+      <p>Select target css file.</p>
+      <select id="select-box" name="select-box">
+      </select>
+    </div>
+    <div id="content">
+      <p>Loading...</p>
+    </div>
 </body>
+<!-- Dev
+<style type="text/css">
+  * { outline: 1px dotted pink; }
+</style>
+-->
+<style type="text/css">
+  * {
+    margin: 0;
+    padding: 0;
+    font: 100%/1.4 "Arial", "Helvetica", sans-serif;
+    font-size: small; }
+  body {
+    width: 800px;
+    overflow-x: hidden;
+    color: #222;
+    min-height: 70px;
+  }
+  .used {
+    display: none;
+  }
+  select {
+    width: 700px;
+  }
+</style>
 </html>
