@@ -1,0 +1,23 @@
+/* dev
+ * { outline: 1px dotted pink; }
+*/
+* {
+  margin: 0;
+  padding: 0;
+  font: 100%/1.4 "Arial", "Helvetica", sans-serif;
+  font-size: small; }
+body {
+  width: 800px;
+  overflow-x: hidden;
+  color: #222;
+  min-height: 70px;
+}
+.used {
+  display: none;
+}
+select {
+  width: 700px;
+}
+#iframe {
+  display: none;
+}

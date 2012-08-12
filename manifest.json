@@ -1,9 +1,14 @@
 {
     "name": "Unused CSS Selectors",
-    "description": "Inspect CSS not used",
-    "version": "0.2",
+    "description": "Inspect unused CSS",
+    "version": "0.5",
+    "manifest_version": 2,
+    "content_security_policy": "default-src 'self'; script-src 'self'; object-src 'self'; img-src 'self' http://* https://* data:; connect-src 'self' http://* https://*; frame-src 'self'; style-src 'self' 'unsafe-inline'",
+    "sandbox": {
+       "pages": ["sandbox.html"]
+    },
     "browser_action": {
-        "popup": "popup.html"
+        "default_popup": "popup.html"
     },
     "permissions": [
         "tabs",
@@ -12,7 +17,7 @@
     ],
     "content_scripts": [
         {
-            "js": [ "content-script.js" ],
+            "js": [ "js/content-script.js" ],
             "run_at": "document_end",
             "matches": [
                 "http://*/*",
@@ -20,7 +25,4 @@
             ]
         }
     ]
-    //"icons": {
-    //   "128": "icon128.png"
-    //},
 }
