@@ -22,9 +22,9 @@ function makeCssUrl (path, url) {
     if (/^https?:\/\//.test(path)) {
         return path;
     } else if (/^\//.test(path)) {
-        return url.replace(/(^https?:\/\/.+?)\/.+/, '$1') + path;
+        return url.replace(/(^https?:\/\/.+?)\/.*/, '$1') + path;
     } else {
-        return url.replace(/(https?:\/\/.+\/).*/,   '$1') + path;
+        return url + path;
     }
 }
 
@@ -41,10 +41,15 @@ $(function () {
         $('#tab a:first').tab('show');
     });
 
-    Deferred.onerror = function (e) { console.log(e.stack) };
+    Deferred.onerror = function (e) { console.error(e.stack, e) };
 
     Deferred.chrome.tabs.getSelected(null).next(function (tab) {
         return Deferred.chrome.tabs.sendMessage(tab.id, {name: 'getContent'}).next(function(res) {
+            if (! res) {
+                console.error('Request faild: ' + tab.url);
+                return;
+            }
+
             var content     = $(res.responseText);
             var cssPaths    = extractCssPaths(content);
             var targetPaths = {};

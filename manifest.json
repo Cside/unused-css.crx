@@ -1,7 +1,7 @@
 {
     "name": "Unused CSS Selectors",
     "description": "Inspect unused CSS",
-    "version": "0.5",
+    "version": "0.7",
     "manifest_version": 2,
     "content_security_policy": "default-src 'self'; script-src 'self'; object-src 'self'; img-src 'self' http://* https://* data:; connect-src 'self' http://* https://*; frame-src 'self'; style-src 'self' 'unsafe-inline'",
     "sandbox": {
