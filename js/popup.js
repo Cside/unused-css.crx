@@ -67,17 +67,22 @@ $(function () {
                     var parser     = new CSSParser();
 
                     var styles = parser.parse(cssContent).cssRules.filter(function (style) {
-                        return style instanceof jscsspStyleRule &&
-                            ! /^(html|body)$/.test(style.mSelectorText);
+                        return style instanceof jscsspStyleRule;
 
                     }).map(function (style) {
                         var selector = style.mSelectorText;
                         var used;
-                        try {
-                            used = !! ($(selector, content).length);
-                        } catch (e) {
-                            console.log('selector parse error: ' + selector + '\n');
+
+                        if (/^(html|body)$/.test(selector)) {
+                            used = true;
+                        } else {
+                            try {
+                                used = !! ($(selector, content).length);
+                            } catch (e) {
+                                console.log('selector parse error: ' + selector + '\n');
+                            }
                         }
+
                         return {
                             styleText: formatCss(style.parsedCssText),
                             used     : used
