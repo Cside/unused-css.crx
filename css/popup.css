@@ -5,19 +5,23 @@
   margin: 0;
   padding: 0;
   font: 100%/1.4 "Arial", "Helvetica", sans-serif;
-  font-size: small; }
+  font-size: small;
+}
 body {
   width: 800px;
   overflow-x: hidden;
   color: #222;
   min-height: 70px;
 }
-.used {
-  display: none;
-}
 select {
   width: 700px;
 }
+code {
+  background-color: transparent;
+}
 #iframe {
   display: none;
+}
+section {
+  margin-left: 10px;
 }

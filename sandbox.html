@@ -1,32 +1,50 @@
 <!DOCTYPE HTML>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title></title>
-  <script type="text/javascript" src="lib/sandbox.js"></script>
-  <script type="text/javascript" src="lib/jarty.js"></script>
-  <script type="text/javascript" src="lib/jarty.debugger.js"></script>
-  <script type="text/jarty" id="template-select-box">
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="lib/sandbox.js"></script>
+    <script type="text/javascript" src="lib/jarty.js"></script>
+    <script type="text/javascript" src="lib/jarty.debugger.js"></script>
+    <script type="text/jarty" id="template-select-box">
+      <p>▼</p>
       {foreach from=$results item=result name=selectBox}
-      <option value="{$jarty.foreach.selectBox.index}">{$result.url}</option>
+        <option value="{$jarty.foreach.selectBox.index}">({$result.usedPercentage}%) {$result.url}</option>
       {/foreach}
-  </script>
-  <script type="text/jarty" id="template-content">
-    <h2>Summary</h2>
-    <p>used: {$used}, unused: {$unused}</p>
-    <h2>Unused Styles</h2>
-    <table>
-      {foreach from=$styles item=style}
-      <tr class="{if $style.used}used{else}unused{/if}">
-        <td>
-          <pre><code>{$style.styleText}</code></pre>
-        </td>
-      </tr>
-      {/foreach}
-    </table>
-  </script>
-</head>
-<body>
-  
-</body>
+    </script>
+    <script type="text/jarty" id="template-content">
+      <section>
+        <ul class="nav nav-tabs" id="tab">
+          <li><a data-toggle="tab" href="#unused">unused ({$unused})</a></li>
+          <li><a data-toggle="tab" href="#used"  >used ({$used})</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane" id="unused">
+            <table>
+              {foreach from=$styles item=style}
+                {if ! $style.used}
+                  <tr>
+                    <td><pre><code>{$style.styleText}</code></pre></td>
+                  </tr>
+                {/if}
+              {/foreach}
+            </table>
+          </div>
+          <div class="tab-pane" id="used">
+            <table>
+              {foreach from=$styles item=style}
+                {if $style.used}
+                  <tr>
+                    <td><pre><code>{$style.styleText}</code></pre></td>
+                  </tr>
+                {/if}
+              {/foreach}
+            </table>
+          </div>
+        </div>
+      </section>
+    </script>
+  </head>
+  <body>
+  </body>
 </html>
